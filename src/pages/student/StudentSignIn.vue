@@ -7,21 +7,23 @@
       STUDENT!
     </h1>
     <div>
-      <form @submit.prevent="" class="flex flex-col items-center">
+      <form @submit.prevent="login" class="flex flex-col items-center">
         <p class="text-xl font-bold">Login to your account</p>
         <input
           type="number"
           name="regno"
           id="regno"
+          v-model.trim="regno"
           placeholder="Registration No."
-          class=" w-72 m-2 rounded-xl border-2 border-solid border-blue-600  bg-black bg-opacity-20 py-1.5 text-center placeholder:text-white"
+          class="m-2 w-72 rounded-xl border-2 border-solid border-blue-600 bg-black bg-opacity-20 py-1.5 text-center placeholder:text-white"
         />
         <input
           type="password"
           name="password"
           id="password"
+          v-model.trim="password"
           placeholder="Password"
-          class=" w-72 m-2 rounded-xl border-2 border-solid border-blue-600  bg-black bg-opacity-20 py-1.5 text-center placeholder:text-white"
+          class="m-2 w-72 rounded-xl border-2 border-solid border-blue-600 bg-black bg-opacity-20 py-1.5 text-center placeholder:text-white"
         />
         <p class="text-xs">Forgot Password? No help for you lol</p>
         <base-button class="mb-1">Login</base-button>
@@ -35,3 +37,27 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      regno: null,
+      password: null,
+    };
+  },
+  methods: {
+    login() {
+      const userDetails = {
+        regno: this.regno,
+        password: this.password,
+      };
+      this.$store.dispatch('student/signIn',userDetails);
+
+      if(this.$store.getters['student/isLoggedIn']){
+        this.$router.push('/student/home');
+      }
+    },
+  },
+};
+</script>

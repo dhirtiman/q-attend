@@ -50,6 +50,7 @@ This will serve the production build of your application on a local server for p
 - Vue.js
 - Vue Router
 - Vite
+- Vuex
 - Tailwind CSS
 
 ## License
