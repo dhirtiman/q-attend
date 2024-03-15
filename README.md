@@ -1,7 +1,57 @@
-# Vue 3 + Vite
+# Q-Attend
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Q-Attend is a Vue.js application for managing attendance records using QR codes.
 
-## Recommended IDE Setup
+## Setup
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+To set up the project, follow these steps:
+
+1. **Clone the Repository:**
+   ```bash
+   git clone <repository-url>
+   ```
+   
+2. **Navigate to Project Directory:**
+   ```bash
+   cd q-attend
+   ```
+
+3. **Install Dependencies:**
+   ```bash
+   npm install
+   ```
+
+## Development
+
+To run the project in development mode, use the following command:
+```bash
+npm run dev
+```
+This will start the development server and open the application in your default web browser.
+
+## Building for Production
+
+To build the project for production, use the following command:
+```bash
+npm run build
+```
+This will generate a production-ready build of your application in the `dist` directory.
+
+## Previewing Production Build
+
+To preview the production build locally, use the following command:
+```bash
+npm run preview
+```
+This will serve the production build of your application on a local server for previewing.
+
+## Technologies Used
+
+- Vue.js
+- Vue Router
+- Vite
+- Tailwind CSS
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
