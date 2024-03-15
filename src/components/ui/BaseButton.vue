@@ -1,14 +1,14 @@
 <template>
   <button
     v-if="!link"
-    class="m-1 rounded bg-blue-500 px-7 py-1.5 text-xs text-white"
+    class=" text-center w-52 m-1 rounded-xl bg-blue-500 px-7 py-1.5 text-xs text-white"
   >
     <slot></slot>
   </button>
   <RouterLink
     v-else
     :to="to"
-    class="m-1 rounded bg-blue-500 px-7 py-1.5 text-xs text-white"
+    class=" text-center w-52 m-1 rounded-xl bg-blue-500 px-7 py-1.5 text-xs text-white"
   >
     <slot> </slot>
   </RouterLink>
