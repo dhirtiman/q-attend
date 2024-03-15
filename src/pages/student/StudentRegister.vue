@@ -67,7 +67,7 @@
 export default {
   mounted(){
 
-    this.students = this.$store.getters['student/getStudents'];   // debug purposes
+    // this.students = this.$store.getters['student/getStudents'];   // debug purposes
   },
   data() {
     return {
