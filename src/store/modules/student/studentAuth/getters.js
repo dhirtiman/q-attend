@@ -2,14 +2,14 @@ export default {
        isLoggedIn(state) {
               return state.isLoggedIn;
        },
-       getStudentAuth: (state) => (regn) => {
+       getStudentAuth: (state) => (regno) => {
 
-              const auth = state.students.find(student => student.regn === regn)
+              const auth = state.students.find(student => student.regno === regno)
 
               console.log(auth);
               return auth ?
                      {
-                            regn: auth.regn,
+                            regno: auth.regno,
                             password: auth.password
                      } 
                      : null
