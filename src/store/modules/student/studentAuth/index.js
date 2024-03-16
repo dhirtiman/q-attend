@@ -11,7 +11,7 @@ export default {
             students: [
                 {
                     fullName: null,
-                    regn: null, //used for id
+                    regno: null, //used for id
                     uniRolln: null,
                     classRolln: null,
                     password: null,

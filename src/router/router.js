@@ -8,14 +8,19 @@ import TeacherSignIn from "../pages/teacher/TeacherSignIn.vue";
 
 
 const routes = [
+    {path: '/', redirect: '/home'},
+    {path: '/home', component: HomeView},
     
-    {path: '/', component: HomeView},
     {path: '/student/signin', component: StudentSignIn},
     {path: '/student/register', component: StudentRegister},
     {path: '/student/home', component: ()=> import('../pages/student/StudentHomeView.vue') },
 
 
     {path: '/teacher/signin', component: TeacherSignIn},
+
+
+    { path: '/:notFound(.*)', redirect: '/home' },
+
     
 
 
