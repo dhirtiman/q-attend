@@ -9,8 +9,8 @@
     <h1 v-if="complete" class="mb-20 mt-20 text-center text-3xl font-bold">
       Attendance Sucessfull..
     </h1>
-    <div v-else class=" relative p-10 size-auto">
-      <p v-if="message" class="absolute top-1 right-0 left-0 mx-64 text-center">{{ message }}</p>
+    <div v-else class=" relative py-10 px-5  w-full h-96">
+      <p v-if="message" class=" animate-pulse absolute top-1 right-0 left-0 mx-10 text-center">{{ message }}</p>
 
       <qrcode-stream class="fixed" @decode="onDecode" @error="onError">
       </qrcode-stream>
