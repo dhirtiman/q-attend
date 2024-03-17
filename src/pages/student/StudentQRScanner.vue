@@ -12,7 +12,7 @@
     <div v-else class=" relative p-10 size-auto">
       <p v-if="message" class="absolute top-1 right-0 left-0 mx-64 text-center">{{ message }}</p>
 
-      <qrcode-stream @decode="onDecode" @error="onError">
+      <qrcode-stream class="fixed" @decode="onDecode" @error="onError">
       </qrcode-stream>
     </div>
   </div>
