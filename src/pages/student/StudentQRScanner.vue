@@ -52,6 +52,7 @@ export default {
       if (decodedString === "ok") {
         // change ok to the attandance session code
         this.complete = true;
+        // send student id to backend (regn)
         return;
       }
       this.message = "scanning..";
