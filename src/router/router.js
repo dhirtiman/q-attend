@@ -14,6 +14,8 @@ const routes = [
     {path: '/student/signin', component: StudentSignIn},
     {path: '/student/register', component: StudentRegister},
     {path: '/student/home', component: ()=> import('../pages/student/StudentHomeView.vue') },
+    {path: '/student/qrscan', component: ()=> import('../pages/student/StudentQRScanner.vue') },
+
 
 
     {path: '/teacher/signin', component: TeacherSignIn},
