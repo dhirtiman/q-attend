@@ -3,7 +3,7 @@
     class="flex h-svh w-full flex-col items-center justify-normal bg-black bg-gradient-to-b from-cyan-900 from-10% via-black text-white"
   >
     <h1 class="mb-20 mt-20 text-center text-3xl font-bold">
-      WELCOME! {studentName}
+      WELCOME! {{studentName}}
     </h1>
 
     <base-button link to="/student/qrscan" class="relative text-sm py-4 w-48">
@@ -16,3 +16,18 @@
     </base-button>
   </div>
 </template>
+
+
+<script>
+
+export default {
+  computed: {
+    studentName(){
+      const regno = this.$store.getters['getCurrentUser'].id;
+      console.log(regno);
+
+      return this.$store.getters['student/getStudent'](regno).fullName;
+    }
+  }
+}
+</script>

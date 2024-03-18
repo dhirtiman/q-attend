@@ -55,6 +55,10 @@ export default {
       this.$store.dispatch('student/signIn',userDetails);
 
       if(this.$store.getters['student/isLoggedIn']){
+        this.$store.dispatch('setUser',{
+          who: 'student',
+          id: this.regno,
+        });
         this.$router.push('/student/home');
       }
     },
