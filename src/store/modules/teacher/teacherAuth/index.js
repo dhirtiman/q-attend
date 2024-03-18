@@ -6,6 +6,7 @@ export default {
     namespaced: true,
     state() {
       return {
+        noTeachingSessions: false,
         teacherIsloggedIn: false,
         teachers: [
           {
@@ -14,14 +15,14 @@ export default {
             password: 'teacher',
 
 
-            teachingSession: [
-              {
-                id: 1,
-                sessionYear: '2024-25',
-                term: 'odd',
-                semesters: [1, 3, 5],
-                paperCodes: ['101T', '102T', '301T', '302T', '501T', '502T']
-              },
+            teachingSessions: [
+              // {
+              //   id: 1,
+              //   sessionYear: '2024-25',
+              //   term: 'odd',
+              //   semesters: [1, 3, 5],
+              //   paperCodes: ['101T', '102T', '301T', '302T', '501T', '502T']
+              // },
             ],
 
 

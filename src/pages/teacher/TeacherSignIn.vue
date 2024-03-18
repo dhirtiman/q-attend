@@ -66,6 +66,10 @@ export default {
 
 
       if (this.$store.getters["teacher/teacherIsloggedIn"]) {
+        this.$store.dispatch('setUser',{
+          who: 'teacher',
+          id: this.creds.email,
+        });
         this.$router.push("/teacher/home");
       }
     },

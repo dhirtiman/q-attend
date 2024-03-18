@@ -14,6 +14,12 @@ export default {
                      } 
                      : null
        },
+       getStudent: (state) => (regno) => {
+
+              const student = state.students.find(student => student.regno === regno)
+
+              return student;
+       },
 
 
 

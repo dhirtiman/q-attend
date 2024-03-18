@@ -11,5 +11,19 @@ export default {
             password: auth.password,
         }
         : null
-    }
+    },
+    getTeacher: (state) => (email) => {
+        const teacher = state.teachers.find(teacher => teacher.email === email)
+
+        return teacher;
+    },
+    getTeachingSessions(state){
+        return state.teachers.find
+    },
+
+    noTeachingSessions(state){
+        
+        return  state.teachers.every(teacher => teacher.teachingSessions.length === 0)
+    },
+      
 }
