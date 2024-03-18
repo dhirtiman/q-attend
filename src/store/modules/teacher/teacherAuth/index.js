@@ -16,13 +16,13 @@ export default {
 
 
             teachingSessions: [
-              // {
-              //   id: 1,
-              //   sessionYear: '2024-25',
-              //   term: 'odd',
-              //   semesters: [1, 3, 5],
-              //   paperCodes: ['101T', '102T', '301T', '302T', '501T', '502T']
-              // },
+              {
+                id: 1,
+                sessionYear: '2024-25',
+                term: 'odd',
+                semesters: [1, 3, 5],
+                paperCodes: ['101T', '102T', '301T', '302T', '501T', '502T']
+              },
             ],
 
 
