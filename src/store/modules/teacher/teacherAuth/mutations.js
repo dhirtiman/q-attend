@@ -7,7 +7,7 @@ export default {
         const teacher = state.teachers.find(teacher => teacher.email === payload.email);
         // If the teacher is found, add the teachingSessions
         if (teacher) {
-          teacher.teachingSessions.push(payload.teachingSessions);
+          teacher.teachingSessions.push(payload.teachingSession);
         }
       }
 }
