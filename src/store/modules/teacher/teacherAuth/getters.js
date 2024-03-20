@@ -17,8 +17,13 @@ export default {
 
         return teacher;
     },
-    getTeachingSessions(state){
-        return state.teachers.find
+    getTeachingSessions(state, _1, _2, rootGetters){
+        const email = rootGetters['getCurrentUser'].id;
+        const teacher =  state.teachers.find(teacher => teacher.email === email)
+
+        if(teacher){
+            return teacher.teachingSessions;
+        }
     },
 
     noTeachingSessions(state){
