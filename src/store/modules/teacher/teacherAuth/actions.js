@@ -11,5 +11,5 @@ export default {
   addTeachingSession(context,payload){
     context.commit('addTeachingSession',payload);
   }
- 
-}
+  
+} 

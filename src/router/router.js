@@ -20,6 +20,8 @@ const routes = [
 
     {path: '/teacher/signin', component: TeacherSignIn},
     {path: '/teacher/home', component: ()=> import('../pages/teacher/TeacherHomeView.vue') },
+    {path: '/teacher/session/:id',props: true,component: ()=> import('../pages/teacher/TeacherTeachingSession.vue')},
+
 
 
 
