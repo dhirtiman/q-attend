@@ -15,7 +15,7 @@ const store = createStore({
         return {
             currentUser: {
                 who: 'teacher', // or 'student'
-                id: 'teacherman@gmail.com',
+                id: 'teacherman@gmail.com', 
             },
 
         }
