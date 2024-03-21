@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-fitw-full flex min-h-screen flex-col items-center justify-normal overflow-x-hidden bg-black bg-gradient-to-b from-cyan-900 from-10% via-black text-white"
+    class="h-fitw-full flex min-h-screen flex-col items-center justify-normal overflow-x-hidden bg-black bg-gradient-to-b from-purple-950 from-10% via-black text-white"
   >
     <h1 class="mb-5 mt-10 text-3xl font-bold">Session Details</h1>
     <div class="mb-8 w-svw rounded-lg bg-gray-800 p-6 shadow-lg">
@@ -25,7 +25,7 @@
       </ul>
     </div>
     <div class="flex flex-col gap-10">
-      <base-button link to="" class="h-12 w-56 py-4 "
+      <base-button link :to="startAttendanceLink" class="h-12 w-56 py-4 "
         >Start Attendance</base-button
       >
       <base-button  link secondary to="" class="h-12 w-56 py-4 "
@@ -57,6 +57,9 @@ export default {
         ...session,
         papers,
       };
+    },
+    startAttendanceLink(){
+      return '/teacher/setupclass/'+this.id;
     },
   },
 };

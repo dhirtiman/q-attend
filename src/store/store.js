@@ -3,12 +3,14 @@ import { createStore } from "vuex";
 import studentAuthModule from './modules/student/studentAuth/index.js'
 import teacherAuthModule from "./modules/teacher/teacherAuth/index.js";
 import papersModule from "./modules/papers/index.js";
+import attendanceSessionModule from "./modules/teacher/attendanceSession/index.js";
 
 
 const store = createStore({
     modules: {
         student: studentAuthModule,
         teacher: teacherAuthModule,
+        attendance: attendanceSessionModule,
         papers: papersModule,
     },
     state(){

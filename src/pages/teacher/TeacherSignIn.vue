@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex h-svh w-full flex-col items-center justify-normal bg-black bg-gradient-to-b from-cyan-900 from-10% via-black text-white"
+    class="flex h-svh w-full flex-col items-center justify-normal bg-black bg-gradient-to-b from-purple-950 from-25% via-black text-white"
   >
     <h1 class="mb-48 mr-32 mt-20 text-left text-4xl font-bold">
       WELCOME <br />
