@@ -21,6 +21,9 @@ const routes = [
     {path: '/teacher/signin', component: TeacherSignIn},
     {path: '/teacher/home', component: ()=> import('../pages/teacher/TeacherHomeView.vue') },
     {path: '/teacher/session/:id',props: true,component: ()=> import('../pages/teacher/TeacherTeachingSession.vue')},
+    {path: '/teacher/setupclass/:id',props: true,component: ()=> import('../pages/teacher/TeacherSetUpClass.vue')},
+    { path: '/teacher/qrpage/:paper(.*)', props: true, component: () => import('../pages/teacher/TeacherQRPage.vue') },
+
 
 
 

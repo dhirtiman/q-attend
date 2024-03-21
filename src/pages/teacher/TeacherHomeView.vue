@@ -1,6 +1,6 @@
 <template>
-  <div
-    class="flex h-svh w-full flex-col items-center justify-normal bg-black bg-gradient-to-b from-cyan-900 from-10% via-black text-white"
+   <div
+    class="flex h-svh w-full flex-col items-center justify-normal bg-black bg-gradient-to-b from-purple-950 from-25% via-black text-white"
   >
     <h1 class="mb-20 mt-20 text-center text-3xl font-bold">
       WELCOME! {{ teacherName }}
@@ -9,11 +9,17 @@
       <p class="text-center text-lg" v-if="noTeachingSession">
         You don't have any Teaching Sessions. <br />Create One to continue
       </p>
-  <TeachingSessionForm
-      v-if="noTeachingSession || wanaAdd"
-      @close="doneAdding"
-    ></TeachingSessionForm>
-      
+      <transition
+        enter-from-class="opacity-0"
+        leave-to-class="opacity-0"
+        enter-active-class="transition duration-300"
+        leave-active-class="transition duration-300"
+      >
+        <TeachingSessionForm
+          v-if="noTeachingSession || wanaAdd"
+          @close="doneAdding"
+        ></TeachingSessionForm>
+      </transition>
     </div>
     <section v-if="!noTeachingSession && !wanaAdd">
       <p class="mb-5 text-center text-lg">

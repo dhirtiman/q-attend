@@ -53,6 +53,7 @@ This will serve the production build of your application on a local server for p
 - Vuex
 - Tailwind CSS
 - vue3-qrcode-reader
+- qrcode.vue
 
 ## License
 
