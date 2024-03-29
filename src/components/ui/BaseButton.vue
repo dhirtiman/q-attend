@@ -1,7 +1,7 @@
 <template>
   <button
     v-if="!link"
-    class="m-1 w-52 rounded-xl bg-blue-500 px-7 py-1.5 text-center text-xs shadow-sm shadow-black"
+    class="m-1 w-52  bg-blue-500 px-7 py-1.5 text-center  shadow-sm shadow-black"
     :class="{ ' bg-blue-300  text-black' : secondary }"
   >
     <slot></slot>
@@ -9,7 +9,7 @@
   <RouterLink
     v-else
     :to="to"
-    class="m-1 w-52 rounded-xl bg-blue-500 px-7 py-1.5 text-center text-xs font-bold shadow-sm shadow-black"
+    class="m-1 w-52  bg-blue-500 px-7 py-1.5 text-center  font-bold shadow-sm shadow-black"
     :class="{ ' bg-blue-300  text-black': secondary }"
   >
     <slot> </slot>
