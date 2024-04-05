@@ -10,7 +10,7 @@ import App from './App.vue'
 
 import BaseButton from './components/ui/BaseButton.vue';
 import BaseDialog from './components/ui/BaseDialog.vue';
-
+import BlobContainer from './components/ui/BlobContainer.vue';
 
 
 const app = createApp(App);
@@ -20,6 +20,7 @@ app.use(store);
 
 app.component('base-button', BaseButton);
 app.component('base-dialog', BaseDialog);
+app.component('blob-container',BlobContainer);
 
 
 app.mount('#app');
