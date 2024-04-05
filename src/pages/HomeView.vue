@@ -2,13 +2,10 @@
   <div
     class="flex h-svh w-full flex-col items-center justify-normal bg-black bg-gradient-to-b from-blue-950 from-10% via-black text-white"
   >
-  <div class="absolute  w-full h-full">
-  <img src="../assets/blob.svg" alt="blob" class="absolute left-10 top-14 z-0" />
-  <img src="../assets/blob.svg" alt="blob" class="absolute left-20 top-20 z-0 size-1/12" />
-  <img src="../assets/blob.svg" alt="blob" class="absolute right-20 top-32 z-0 size-10" />
-  <img src="../assets/blob.svg" alt="blob" class="absolute right-20 top-80 z-0 size-8" />
-  <img src="../assets/blob.svg" alt="blob" class="absolute left-20 top-72 z-0 size-20" />
-</div>
+    <blob-container class="left-0  size-72"></blob-container>
+  <blob-container class=" rotate-180 left-10  bottom-0  size-40" smol></blob-container>
+
+
 
     <div class="fixed h-full w-full backdrop-blur-sm"></div>
     <div class="z-10 flex flex-col items-center">
