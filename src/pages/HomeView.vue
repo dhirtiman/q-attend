@@ -2,12 +2,13 @@
   <div
     class="flex h-svh w-full flex-col items-center justify-normal bg-black bg-gradient-to-b from-blue-950 from-10% via-black text-white"
   >
-    <blob-container class="left-0  size-72"></blob-container>
-  <blob-container class=" rotate-180 left-10  bottom-0  size-40" smol></blob-container>
-
-
-
+    <blob-container class="left-0 size-72"></blob-container>
+    <blob-container
+      class="bottom-0 left-10 size-40 rotate-180"
+      smol
+    ></blob-container>
     <div class="fixed h-full w-full backdrop-blur-sm"></div>
+
     <div class="z-10 flex flex-col items-center">
       <h1 class="my-12 mb-10 mt-44 text-center text-4xl font-bold">
         Welcome to Qattend!

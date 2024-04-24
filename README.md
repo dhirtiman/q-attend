@@ -54,6 +54,7 @@ This will serve the production build of your application on a local server for p
 - Tailwind CSS
 - vue3-qrcode-reader
 - qrcode.vue
+- firebase
 
 ## License
 

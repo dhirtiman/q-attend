@@ -3,20 +3,24 @@
     class="h-fitw-full flex min-h-screen flex-col items-center justify-normal overflow-x-hidden bg-black bg-gradient-to-b from-purple-950 from-10% via-black text-white"
   >
     <h1 class="mb-5 mt-10 text-3xl font-bold">Session Details</h1>
-    <div class="mb-8 w-svw rounded-lg bg-gray-800 p-6 shadow-lg">
-      <p class="mb-4 text-lg text-white">
+    <div
+      class="h-auto w-4/5 rounded-xl border border-violet-600 bg-black bg-opacity-30 text-justify mb-10"
+    >
+      <p class="mb-4 text-xl text-white">
         <span class="font-bold">Session ID:</span> {{ session.id }}
       </p>
-      <p class="mb-4 text-lg text-white">
+      <p class="mb-4 text-xl text-white">
         <span class="font-bold">Session Year:</span> {{ session.sessionYear }}
       </p>
-      <p class="mb-4 text-lg text-white">
+      <p class="mb-4 text-xl text-white">
         <span class="font-bold">Term:</span> {{ session.term }}
       </p>
-      <p class="mb-4 text-lg text-white">
+      <p class="mb-4 text-xl text-white">
         <span class="font-bold">Semesters:</span>
         {{ session.semesters.join(", ") }}
       </p>
+    </div>
+    <div class="px-5 h-auto w-4/5 rounded-xl border border-violet-600 bg-black bg-opacity-30 text-justify mb-10">
       <ul class="mb-4 text-white">
         <span class="text-lg font-bold">Papers:</span>
         <li v-for="paper in session.papers" :key="paper.id" class="text-sm">
@@ -25,13 +29,12 @@
       </ul>
     </div>
     <div class="flex flex-col gap-10">
-      <base-button link :to="startAttendanceLink" class="h-12 w-56 py-4 "
-        >Start Attendance</base-button
+      <base-button link :to="startAttendanceLink" class="rounded-2xl h-12 w-64 py-3 bg-violet-500 "
+        >Start Attendance session</base-button
       >
-      <base-button  link secondary to="" class="h-12 w-56 py-4 "
-        >Attendance History</base-button
+      <base-button link secondary to="" class="rounded-2xl h-12 w-64 py-3 bg-violet-400"
+        >View Attendance History</base-button
       >
-      
     </div>
   </div>
 </template>
@@ -58,8 +61,8 @@ export default {
         papers,
       };
     },
-    startAttendanceLink(){
-      return '/teacher/setupclass/'+this.id;
+    startAttendanceLink() {
+      return "/teacher/setupclass/" + this.id;
     },
   },
 };
