@@ -16,13 +16,10 @@ import BlobContainer from './components/ui/BlobContainer.vue';
 
 import { initializeApp } from "firebase/app";
 
-console.log(process.env.VERCEL_ENV);
-console.log(process.env.VITE_API_URL);
-console.log(import.meta.env.VITE_API_URL);
 
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_SECRET_API_KEY || process.env.VITE_API_URL ,
+  apiKey: import.meta.env.VITE_SECRET_API_KEY || import.meta.env.VITE_API_URL ,
   authDomain: "test-bd9cb.firebaseapp.com",
   databaseURL: "https://test-bd9cb-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "test-bd9cb",
