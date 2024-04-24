@@ -16,7 +16,7 @@ import BlobContainer from './components/ui/BlobContainer.vue';
 
 import { initializeApp } from "firebase/app";
 
-console.log(process.env.APP_API_KEY);
+console.log(process.env);
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_SECRET_API_KEY || process.env.APP_API_KEY ,
