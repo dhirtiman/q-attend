@@ -18,7 +18,7 @@ import { initializeApp } from "firebase/app";
 
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_SECRET_API_KEY || process.env.SECRET_API_KEY ,
+  apiKey: import.meta.env.VITE_SECRET_API_KEY || process.env.VITE_SECRET_API_KEY ,
   authDomain: "test-bd9cb.firebaseapp.com",
   databaseURL: "https://test-bd9cb-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "test-bd9cb",
