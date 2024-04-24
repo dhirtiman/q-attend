@@ -5,9 +5,8 @@
         <button @click="goBack" class="text-xl font-bold">⬅</button>
       </div>
     </header>
-  <div class="">
-    <RouterView ></RouterView>    
-  </div>
+  
+  <RouterView ></RouterView>    
 </template>
 
 <script>

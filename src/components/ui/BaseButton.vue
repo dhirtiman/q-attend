@@ -1,14 +1,16 @@
 <template>
   <button
     v-if="!link"
-    class=" text-center shadow-sm shadow-black w-52 m-1 rounded-xl bg-blue-500 px-7 py-1.5 text-xs text-white"
+    class="m-1 w-52  bg-blue-500 px-7 py-1.5 text-center  shadow-sm shadow-black"
+    :class="{ ' bg-blue-300  text-black' : secondary }"
   >
     <slot></slot>
   </button>
   <RouterLink
     v-else
     :to="to"
-    class=" text-center shadow-sm shadow-black w-52 m-1 rounded-xl bg-blue-500 px-7 py-1.5 text-xs text-white"
+    class="m-1 w-52  bg-blue-500 px-7 py-1.5 text-center  font-bold shadow-sm shadow-black"
+    :class="{ ' bg-blue-300  text-black': secondary }"
   >
     <slot> </slot>
   </RouterLink>
@@ -31,6 +33,10 @@ export default {
       type: String,
       required: false,
       default: "/",
+    },
+    secondary: {
+      type: Boolean,
+      default: false,
     },
   },
 };
