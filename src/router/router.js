@@ -5,7 +5,7 @@ import StudentSignIn from "../pages/student/StudentSignIn.vue";
 import StudentRegister from "../pages/student/StudentRegister.vue";
 
 import TeacherSignIn from "../pages/teacher/TeacherSignIn.vue";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const routes = [
   { path: "/", redirect: "/home" },
@@ -51,23 +51,34 @@ const routes = [
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes,
-  });
+  history: createWebHistory(),
+  routes,
+});
 
-router.beforeEach((to, _, next) => {
+const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const removeListener = onAuthStateChanged(
+      getAuth(),
+      (user) => {
+        removeListener();
+        resolve(user);
+      },
+      reject,
+    );
+  });
+};
+
+router.beforeEach(async(to, _, next) => {
   if (to.meta.requiresAuth) {
-    if (getAuth().currentUser) {
+    if (await getCurrentUser()) {
       next();
     } else {
-        alert('You Don\'t have access!');
-        next('/');
+      alert("You Don't have access!");
+      next("/");
     }
   } else {
     next();
   }
 });
-
-
 
 export default router;

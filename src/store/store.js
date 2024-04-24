@@ -19,6 +19,7 @@ const store = createStore({
                 who: 'teacher', // or 'student'
                 id: 'teacherman@gmail.com', 
             },
+            isLoggedIn: false,
 
         }
     },
@@ -26,15 +27,24 @@ const store = createStore({
         getCurrentUser(state){
             return state.currentUser;
         },
+        getLoginState(state){
+            return state.isLoggedIn;
+        },
     },
     actions: {
         setUser(context,payload){
             context.commit('setUser',payload);
-        }
+        },
+        setLogin(context,payload){
+            context.commit('setLogin',payload);
+        },
     },
     mutations: {
         setUser(state,payload){
             state.currentUser = payload;
+        },
+        setLogin(state,payload){
+            state.isLoggedIn = payload;
         }
     },
 });
