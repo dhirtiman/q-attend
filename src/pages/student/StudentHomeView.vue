@@ -23,10 +23,7 @@
 export default {
   computed: {
     studentName(){
-      const regno = this.$store.getters['getCurrentUser'].id;
-      console.log(regno);
-
-      return this.$store.getters['student/getStudent'](regno).fullName;
+     return 'student'
     }
   }
 }

@@ -19,6 +19,14 @@
       <div>
         <form @submit.prevent="" class="flex flex-col items-center">
           <input
+            type="email"
+            name="email"
+            id="email"
+            v-model.trim="email"
+            placeholder=" email"
+            class="m-2 w-72 rounded-xl border-2 border-solid border-blue-600 bg-black bg-opacity-20 py-1.5 text-center placeholder:text-white"
+          />
+          <input
             type="text"
             name="fullName"
             id="fullName"
@@ -69,6 +77,12 @@
           <p class="text-red-600" v-if="!formIsvalid">
             Please Check if password matches
           </p>
+          <p
+          class="absolute left-0 right-0 top-3/4 animate-pulse text-center text-red-600"
+          v-if="error"
+        >
+          {{ error }}
+        </p>
           <base-button @click="signUp" class="mt-24 py-2">Sign Up</base-button>
         </form>
       </div>
@@ -81,13 +95,11 @@ export default {
   mounted() {
     // this.students = this.$store.getters["student/getStudents"]; // debug purposes
   },
-  computed: {
-    userExists() {
-      return !!this.$store.getters["student/getStudentAuth"](this.regno);
-    },
-  },
+  computed: {},
   data() {
     return {
+      email: null,
+
       fullName: null,
       regno: null,
       uniRollno: null,
@@ -98,12 +110,19 @@ export default {
       formIsvalid: true,
       notSuccess: false,
       formSubmitted: false,
+      error: null,
 
       students: null, //debug purposes
     };
   },
   methods: {
-    signUp() {
+    resetError(){
+      setTimeout(() => {
+          this.error = null;
+        }, 3000);
+    },
+    async signUp() {
+     
       console.log(this.password, this.password2);
 
       if (this.password !== this.password2) {
@@ -112,28 +131,25 @@ export default {
       }
       this.formIsvalid = true;
 
-      if (this.userExists) {
-        this.notSuccess = true;
-        setTimeout(() => {
-          this.$router.go();
-        }, 2.5 * 1000);
-        return;
-      }
-
       const student = {
         fullName: this.fullName,
         regno: this.regno, //used for id
         uniRolln: this.uniRollno,
         classRolln: this.classRollno,
         password: this.password,
+        email: this.email,
       };
-      this.$store.dispatch("student/signUp", student);
-      this.formSubmitted = true;
-      console.log(this.formSubmitted);
 
-      setTimeout(() => {
+      try {
+        console.log('trying...');
+        await this.$store.dispatch("student/signUp", student);
         this.$router.push("/student/signin");
-      }, 4 * 1000);
+        this.formSubmitted = true;
+        console.log(this.formSubmitted);
+      } catch (error) {
+        this.error = error.code;
+        this.resetError();
+      }
     },
   },
 };

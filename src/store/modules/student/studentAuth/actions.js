@@ -1,24 +1,44 @@
+import {getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,} from "firebase/auth";
+import { getDatabase,} from 'firebase/database';
 
 export default {
-    signUp(context, payload) {
-        const exists = context.getters.getStudentAuth(payload.regno) || false;
+  async signUp(context, payload) {
+    console.log('trying signgup');
+    await createUserWithEmailAndPassword(
+      getAuth(),
+      payload.email,
+      payload.password,
+    ).then((data) => {
+        // context.dispatch("saveStudentData", payload);
+        console.log("Successfuly Signed up");
+      })
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
 
-        if(exists){
-            return
-        }
 
-        context.commit('addStudent', payload)
+  },
+  async signIn(context, payload) {
+   await signInWithEmailAndPassword(getAuth(),payload.email,payload.password)
+   .then((data)=>{
+    console.log('Sucessfully logged in');
+   })
+   .catch((error)=> {
+    console.log(error);
+    throw error;
+   })
+  },
 
-    },
-    signIn(context, payload, ) {
 
-        const auth = context.getters.getStudentAuth(payload.regno) || false;
-
-        if (auth) {
-            if(auth.password === payload.password)
-            context.commit('login')
-        }
-
-    }
-
-}
+  async saveStudentData(context, payload) {
+    const db = getDatabase()
+    const student = {
+        fullName: this.fullName,
+        regno: this.regno, //used for id
+        uniRolln: this.uniRollno,
+        classRolln: this.classRollno,
+        password: this.password,
+      };
+  },
+};

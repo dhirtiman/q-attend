@@ -10,11 +10,11 @@
       <form @submit.prevent="login" class="flex flex-col items-center">
         <p class="text-xl font-bold">Login to your account</p>
         <input
-          type="number"
-          name="regno"
-          id="regno"
-          v-model.trim="regno"
-          placeholder="Registration No."
+          type="email"
+          name="email"
+          id="email"
+          v-model.trim="email"
+          placeholder="Email"
           class="m-2 w-72 rounded-xl border-2 border-solid border-blue-600 bg-black bg-opacity-20 py-1.5 text-center placeholder:text-white"
         />
         <input
@@ -34,6 +34,12 @@
       <RouterLink class="font-bold text-blue-600" to="/student/register"
         >Register</RouterLink
       >
+      <p
+          class="absolute left-0 right-0 top-80 animate-pulse text-center text-red-600"
+          v-if="error"
+        >
+          {{ error }}
+        </p>
     </div>
   </div>
 </template>
@@ -42,25 +48,33 @@
 export default {
   data() {
     return {
-      regno: null,
+      email: null,
       password: null,
+      error: null,
     };
   },
   methods: {
-    login() {
-      const userDetails = {
-        regno: this.regno,
+    resetError(){
+      setTimeout(() => {
+          this.error = null;
+        }, 3000);
+    },
+    async login() {
+      console.log('logging in');
+      const studentDetails = {
+        email: this.email,
         password: this.password,
       };
-      this.$store.dispatch('student/signIn',userDetails);
+      try {
+        await this.$store.dispatch("student/signIn", studentDetails);
+        this.$router.push("/student/home");
 
-      if(this.$store.getters['student/isLoggedIn']){
-        this.$store.dispatch('setUser',{
-          who: 'student',
-          id: this.regno,
-        });
-        this.$router.push('/student/home');
+      } catch (error) {
+        this.error = error.code;
+        this.resetError();
+        
       }
+
     },
   },
 };

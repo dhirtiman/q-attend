@@ -11,8 +11,8 @@ const routes = [
   { path: "/", redirect: "/home" },
   { path: "/home", component: HomeView },
 
-  { path: "/student/signin", component: StudentSignIn },
-  { path: "/student/register", component: StudentRegister },
+  { path: "/student/signin", component: StudentSignIn, meta: {isAuthPage: true} },
+  { path: "/student/register", component: StudentRegister , meta: {isAuthPage: true} },
   {
     path: "/student/home",
     component: () => import("../pages/student/StudentHomeView.vue"),
@@ -22,7 +22,7 @@ const routes = [
     component: () => import("../pages/student/StudentQRScanner.vue"),
   },
 
-  { path: "/teacher/signin", component: TeacherSignIn },
+  { path: "/teacher/signin", component: TeacherSignIn, meta: {isAuthPage: true} },
   {
     path: "/teacher/home",
     component: () => import("../pages/teacher/TeacherHomeView.vue"),
