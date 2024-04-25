@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex h-svh w-full flex-col items-center justify-normal bg-black bg-gradient-to-b from-purple-950 from-25% via-black text-white"
+    class="flex h-lvh w-full flex-col items-center justify-normal bg-black bg-gradient-to-b from-purple-950 from-25% via-black text-white"
   >
     <blob-container class="left-0 size-72"></blob-container>
     <blob-container
@@ -9,7 +9,8 @@
     ></blob-container>
     <div class="fixed h-full w-full backdrop-blur-sm"></div>
 
-    <div class="z-10 flex flex-col items-center">
+    <div class="z-10 my-1 h-svh flex flex-col items-center ">
+
       <h1 class="mb-20 mt-20 text-center text-3xl font-bold">
         Hi! , {{ teacherName }}
       </h1>
@@ -43,7 +44,7 @@
           Choose a Teaching session to continue
         </p>
         <ul
-          class="h-96 w-full overflow-y-scroll rounded-xl border bg-black bg-opacity-30 text-center"
+          class="max-h-60 w-full overflow-y-scroll rounded-xl border bg-black bg-opacity-30 text-center"
         >
           <teaching-session-item
             class="mx-auto"
@@ -51,7 +52,6 @@
             :key="session.id"
             :session
           ></teaching-session-item>
-
           <li class="my-2"></li>
         </ul> 
         <base-button
