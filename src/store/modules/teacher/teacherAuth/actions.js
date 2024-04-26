@@ -2,6 +2,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  
 } from "firebase/auth";
 
 
@@ -26,6 +27,8 @@ export default {
         console.error(error);
         throw error;
       });
+
+      
   },
   addTeachingSession(context, payload) {
     context.commit("addTeachingSession", payload);

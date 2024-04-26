@@ -2,11 +2,11 @@
   <div
     class="flex h-svh w-full flex-col items-center justify-normal bg-black bg-gradient-to-b from-purple-950 from-25% via-black text-white"
   >
-    <blob-container class="left-0 size-72"></blob-container>
-    <div class="fixed h-full w-full backdrop-blur-sm"></div>
+    <blob-container class="pointer-events-none left-0 size-72"></blob-container>
+    <div class="pointer-events-none fixed h-full w-full backdrop-blur-sm"></div>
 
-    <div class="z-10 flex flex-col items-center">
-      <h1 class="mb-48 mr-32 mt-32 text-left text-4xl font-bold">
+    <div class="z-10 my-1 h-svh flex flex-col items-center border">
+      <h1 class="mb-32 mr-32 mt-32 text-left text-4xl font-bold">
         WELCOME <br />
         Teacher!
       </h1>
@@ -24,7 +24,7 @@
           {{ error }}
         </p>
 
-        <form @submit.prevent class="mt-6 flex flex-col items-center">
+        <form @submit.prevent class="mt-1 flex flex-col items-center">
           <p class="text-xl font-bold">sign in to your account</p>
           <input
             type="email"
@@ -46,7 +46,7 @@
             >Login</base-button
           >
           <p clas="text">or</p>
-          <base-button @click="signup" class="mb-1 rounded-lg bg-violet-500"
+          <base-button @click="signup" class=" rounded-lg bg-violet-500"
             >Sign Up instead</base-button
           >
         </form>

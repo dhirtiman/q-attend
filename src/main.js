@@ -14,7 +14,11 @@ import BaseButton from './components/ui/BaseButton.vue';
 import BaseDialog from './components/ui/BaseDialog.vue';
 import BlobContainer from './components/ui/BlobContainer.vue';
 
+
+
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
 
 
 
@@ -28,7 +32,16 @@ const firebaseConfig = {
   appId: "1:208852887883:web:82c16e863f8a3ee149a0ce"
 };
 
-initializeApp(firebaseConfig);
+
+  const firebaseApp = initializeApp(firebaseConfig);
+  const db = getFirestore(firebaseApp);
+  
+
+
+export {
+  db
+}
+
 
 const app = createApp(App);
 

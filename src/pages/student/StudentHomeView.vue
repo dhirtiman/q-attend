@@ -21,12 +21,17 @@
 <script>
 
 export default {
-  computed: {
-    studentName(){
-      const regno = this.$store.getters['getCurrentUser'].id;
-      console.log(regno);
-
-      return this.$store.getters['student/getStudent'](regno).fullName;
+  mounted(){
+    try {
+      const fullName = this.$store.getters['student/getStudent'].fullName;
+      this.studentName = fullName;
+    }catch(error){
+      console.log(error);
+    }
+  },
+  data(){
+    return {
+      studentName: null,
     }
   }
 }
