@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { getAuth, onAuthStateChanged, signOut  } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 let auth;
 
@@ -43,9 +43,13 @@ export default {
       return true ? this.$route.fullPath === "/home" : false;
     },
     isLoggedIn() {
-      if (!this.$route.meta.isAuthPage && this.$store.getters["getLoginState"]) {
+      if (
+        !this.$route.meta.isAuthPage &&
+        this.$store.getters["getLoginState"]
+      ) {
         return true;
-      }return false
+      }
+      return false;
     },
   },
   methods: {
@@ -53,14 +57,14 @@ export default {
       this.$router.go(-1);
     },
     logout() {
-      if (this.$store.getters['student/getStudent']) {
-        this.$store.dispatch('student/logout');
-      }
+      this.$store.dispatch("student/logout");
+      this.$store.dispatch("teacher/logout");
       console.log("logging out...");
       signOut(auth).then(() => {
         this.$router.push("/");
       });
     },
+   
   },
 };
 </script>

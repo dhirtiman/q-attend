@@ -107,6 +107,9 @@
 <script>
 export default {
   emits: ["close"],
+  created() {
+    this.$store.dispatch("papers/retrievePapers");
+  },
   computed: {
     papers() {
       return this.$store.getters["papers/getPapersBySemesters"](
@@ -130,6 +133,7 @@ export default {
   },
   methods: {
     submitForm() {
+      console.log("submitting form");
       if (
         this.form.sessionYear === "" ||
         this.form.semesters.length < 1 ||
@@ -141,20 +145,17 @@ export default {
         }, 3000);
         return;
       }
-
       const payload = {
         email: this.$store.getters["getCurrentUser"].id,
         teachingSession: {
-          id: new Date().toISOString(),
+          id: this.$store.getters["teacher/getTeacher"].uid,
           ...this.form,
         },
       };
 
+      console.log(payload);
       this.$store.dispatch("teacher/addTeachingSession", payload);
-      this.$emit("close");
-      console.log(
-        this.$store.getters["teacher/getTeacher"]("teacherman@gmail.com"),
-      );
+      this.closeForm();
     },
     closeForm() {
       this.$emit("close");

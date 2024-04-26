@@ -7,6 +7,8 @@ import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "src/main.js";
 
 export default {
+
+  
   async signUp(context, payload) {
     console.log("trying signgup");
     await createUserWithEmailAndPassword(
@@ -26,6 +28,8 @@ export default {
         throw error;
       });
   },
+
+
   async signIn(context, payload) {
     await signInWithEmailAndPassword(getAuth(), payload.email, payload.password)
       .then((data) => {

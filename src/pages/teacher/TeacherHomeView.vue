@@ -75,8 +75,7 @@ export default {
   mounted() {},
   computed: {
     teacherName() {
-      const email = this.$store.getters["getCurrentUser"].id;
-      return this.$store.getters["teacher/getTeacher"](email).fullName;
+      return 'teacherman'
     },
     noTeachingSession() {
       return this.$store.getters["teacher/noTeachingSessions"];

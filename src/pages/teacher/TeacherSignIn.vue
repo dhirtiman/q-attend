@@ -5,7 +5,7 @@
     <blob-container class="pointer-events-none left-0 size-72"></blob-container>
     <div class="pointer-events-none fixed h-full w-full backdrop-blur-sm"></div>
 
-    <div class="z-10 my-1 h-svh flex flex-col items-center border">
+    <div class="z-10 my-1 h-svh flex flex-col items-center ">
       <h1 class="mb-32 mr-32 mt-32 text-left text-4xl font-bold">
         WELCOME <br />
         Teacher!
@@ -57,6 +57,8 @@
 
 <script>
 export default {
+  mounted(){
+  },
   data() {
     return {
       creds: {

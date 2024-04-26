@@ -11,16 +11,26 @@ const routes = [
   { path: "/", redirect: "/home" },
   { path: "/home", component: HomeView },
 
+
+
+
+
+
   { path: "/student/signin", component: StudentSignIn, meta: {isAuthPage: true} },
   { path: "/student/register", component: StudentRegister , meta: {isAuthPage: true} },
   {
     path: "/student/home",
-    component: () => import("../pages/student/StudentHomeView.vue"),
+    component: () => import("../pages/student/StudentHomeView.vue" ),
   },
   {
     path: "/student/qrscan",
     component: () => import("../pages/student/StudentQRScanner.vue"),
+
   },
+
+
+
+
 
   { path: "/teacher/signin", component: TeacherSignIn, meta: {isAuthPage: true} },
   {
@@ -80,5 +90,7 @@ router.beforeEach(async (to, _, next) => {
     next();
   }
 });
+
+
 
 export default router;
