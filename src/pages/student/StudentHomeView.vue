@@ -21,9 +21,17 @@
 <script>
 
 export default {
-  computed: {
-    studentName(){
-     return 'student'
+  mounted(){
+    try {
+      const fullName = this.$store.getters['student/getStudent'].fullName;
+      this.studentName = fullName;
+    }catch(error){
+      console.log(error);
+    }
+  },
+  data(){
+    return {
+      studentName: null,
     }
   }
 }

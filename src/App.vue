@@ -53,6 +53,9 @@ export default {
       this.$router.go(-1);
     },
     logout() {
+      if (this.$store.getters['student/getStudent']) {
+        this.$store.dispatch('student/logout');
+      }
       console.log("logging out...");
       signOut(auth).then(() => {
         this.$router.push("/");

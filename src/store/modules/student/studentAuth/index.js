@@ -8,16 +8,8 @@ export default {
     namespaced: true,
     state() {
         return {
-            students: [
-                {
-                    fullName: null,
-                    regno: null, //used for id
-                    uniRolln: null,
-                    classRolln: null,
-                    password: null,
-                },
-            ],
             isLoggedIn: false,
+            student: null,
         };
     },
     mutations,
