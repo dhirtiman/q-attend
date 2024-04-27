@@ -1,26 +1,44 @@
+import { doc, addDoc, getDoc, updateDoc, arrayUnion, collection } from "firebase/firestore";
+
+import { db } from "src/main.js";
+
+
 
 export default {
- initSession(context,payload){
+ async initSession(context,payload){
     // keep the session details in a session instance in the store
-    //
+    const uid = context.rootGetters['teacher/getTeacher'].uid;
 
     payload = {
-        id: new Date().toISOString()+'69420',
-        date: getCurrentDate(),
-        ...payload,
-        students: [],
+      date: getCurrentDate(),
+      ...payload,
+      students: [],
+  }
+   const attendanceDocRef =  await addDoc(collection(db,'attendanceSessions',uid,'aSessions'),{
+         ...payload,
+    })
+
+    payload = {
+      id: attendanceDocRef.id,
+      ...payload,
     }
+
     context.commit('createSession',payload);
     
-    // send the state to backend too
+    // send the state to backend too done
 
  },
- pushAttendance(context,payload){
-    // accessed by the student client 
+ async pushAttendance(context,payload){ // {student and teacher uid and documentid} 
+   // push the student to backend session.students
+ 
+   const attendanceSessionRef = doc(db,'attendanceSessions',payload.teacherUid,'aSessions',payload.id);
+   
+   await updateDoc(attendanceSessionRef,{
+      students: arrayUnion(payload.studentUid)
+   }).catch((error)=>{
+      console.log(error);
+   })
 
-    context.commit('pushStudent',payload); // for now  student    actually not even for now cuz ther is no backend
-
-    // push the student to backend session.students  
  },
 
  endSession(context){

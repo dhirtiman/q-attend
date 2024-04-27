@@ -9,8 +9,7 @@
     ></blob-container>
     <div class="fixed h-full w-full backdrop-blur-sm"></div>
 
-    <div class="z-10 my-1 h-svh flex flex-col items-center ">
-
+    <div class="z-10 my-1 flex h-svh flex-col items-center">
       <h1 class="mb-20 mt-20 text-center text-3xl font-bold">
         Hi! , {{ teacherName }}
       </h1>
@@ -31,39 +30,37 @@
         </transition>
       </div>
       <transition
-          enter-from-class="opacity-0"
-          leave-to-class="opacity-0"
-          enter-active-class="transition duration-300"
-          leave-active-class="transition duration-300"
-        >
-        <section
-        class="flex flex-col items-center"
-        v-if="!noTeachingSession && !wanaAdd"
+        enter-from-class="opacity-0"
+        leave-to-class="opacity-0"
+        enter-active-class="transition duration-300"
+        leave-active-class="transition duration-300"
       >
-        <p class="mb-5 text-center text-lg">
-          Choose a Teaching session to continue
-        </p>
-        <ul
-          class="max-h-60 w-full overflow-y-scroll rounded-xl border bg-black bg-opacity-30 text-center"
+        <section
+          class="flex flex-col items-center"
+          v-if="!noTeachingSession && !wanaAdd"
         >
-          <teaching-session-item
-            class="mx-auto"
-            v-for="session in teachingSessions"
-            :key="session.id"
-            :session
-          ></teaching-session-item>
-          <li class="my-2"></li>
-        </ul> 
-        <base-button
-          @click="addMore"
-          class="mt-10 h-12 w-40 rounded-xl text-xl py-2 bg-violet-400"
-          secondary
-          >Add more</base-button
-        >
-      </section>
-
-        </transition>
-          </div>
+          <p class="mb-5 text-center text-lg">
+            Choose a Teaching session to continue
+          </p>
+          <ul
+            class="max-h-60 w-full overflow-y-scroll rounded-xl border bg-black bg-opacity-30 text-center"
+          >
+            <teaching-session-item
+              class="mx-auto"
+              v-for="(session,index) in teachingSessions"
+              :index
+            ></teaching-session-item>
+            <li class="my-2"></li>
+          </ul>
+          <base-button
+            @click="addMore"
+            class="mt-10 h-12 w-40 rounded-xl bg-violet-400 py-2 text-xl"
+            secondary
+            >Add more</base-button
+          >
+        </section>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -72,16 +69,27 @@ import TeachingSessionForm from "../../components/teacher/TeachingSessionForm.vu
 import TeachingSessionItem from "../../components/teacher/TeachingSessionItem.vue";
 
 export default {
-  mounted() {},
+  data() {
+    return {
+      i: 0,
+    };
+  },
+  mounted() {
+    const teacher = this.$store.getters["teacher/getTeacher"];
+    this.$store.dispatch("teacher/retrieveTeachingSessions", teacher);
+    console.log(this.$store.getters["teacher/getTeachingSessions"]);
+  },
   computed: {
     teacherName() {
-      return 'teacherman'
+      return "teacherman";
     },
     noTeachingSession() {
       return this.$store.getters["teacher/noTeachingSessions"];
     },
     teachingSessions() {
-      return this.$store.getters["teacher/getTeachingSessions"];
+      const tSessions = this.$store.getters["teacher/getTeachingSessions"];
+      console.log(tSessions);
+      return tSessions;
     },
   },
   components: {

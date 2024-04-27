@@ -2,7 +2,7 @@ export default {
     createSession(state,payload){
         state.session = payload;
     },
-    pushStudent(state,payload){ // temporary
+    pushStudent(state,payload){ // temporary //what lol
         state.session.students.push(payload);
     },
     endSession(state,payload){

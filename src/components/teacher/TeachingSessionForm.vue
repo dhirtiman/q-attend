@@ -145,12 +145,10 @@ export default {
         }, 3000);
         return;
       }
+
       const payload = {
-        email: this.$store.getters["getCurrentUser"].id,
-        teachingSession: {
-          id: this.$store.getters["teacher/getTeacher"].uid,
+          uid: this.$store.getters["teacher/getTeacher"].uid,
           ...this.form,
-        },
       };
 
       console.log(payload);

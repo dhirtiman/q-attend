@@ -41,18 +41,21 @@
 
 <script>
 export default {
-  props: ["id"],
+  created() {
+    this.$store.dispatch("papers/retrievePapers");
+  },
   data() {
-    return {};
+    return {
+      id: this.$route.params.id
+    };
   },
   computed: {
     session() {
-      const session = this.$store.getters["teacher/getTeachingSessions"].find(
-        (session) => session.id === this.id,
-      );
+      const session = this.$store.getters["teacher/getTeachingSessions"][this.id]
       const papers = [];
       for (const paperCode of session.paperCodes) {
         const paper = this.$store.getters["papers/getPaperById"](paperCode);
+        console.log(paper);
         papers.push(paper);
       }
 

@@ -10,6 +10,7 @@ export default {
         return {
             isLoggedIn: false,
             student: null,
+            attendancePushed: false,
         };
     },
     mutations,

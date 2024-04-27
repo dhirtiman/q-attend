@@ -4,6 +4,9 @@ export default {
     },
   
     getPaperById: (state) => (paperId) => {
+      if (!state.papers) {
+        return 'no'
+      }
       return state.papers.find(paper => paper.id === paperId);
     },
     getPapersBySemesters(state) {

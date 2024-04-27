@@ -7,7 +7,7 @@ export default {
   state() {
     return {
       session: {
-        id: '1',
+        id: '1', 
         date: '20-03-2024',
         time: '10:30',
         semester: '1',  // 3 or 5 

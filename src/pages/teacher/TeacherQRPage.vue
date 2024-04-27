@@ -62,7 +62,14 @@ export default {
   },
   computed: {
     sessionId() {
-      return this.$store.getters["attendance/getSession"].id;
+       const id = this.$store.getters["attendance/getSession"].id;
+       const uid = this.$store.getters['teacher/getTeacher'].uid;
+       const payload = {
+        id,
+        uid,
+       }
+
+       return JSON.stringify(payload);
     },
     formattedTime() {
       const minutes = Math.floor(this.timer / 60);

@@ -9,8 +9,13 @@
     <h1 v-if="complete" class="mb-20 mt-20 text-center text-3xl font-bold">
       Attendance Sucessfull..
     </h1>
-    <div v-else class=" relative py-10 px-5  w-full h-96">
-      <p v-if="message" class=" animate-pulse absolute top-1 right-0 left-0 mx-10 text-center">{{ message }}</p>
+    <div v-else class="relative h-96 w-full px-5 py-10">
+      <p
+        v-if="message"
+        class="absolute left-0 right-0 top-1 mx-10 animate-pulse text-center"
+      >
+        {{ message }}
+      </p>
 
       <qrcode-stream class="fixed" @decode="onDecode" @error="onError">
       </qrcode-stream>
@@ -27,12 +32,20 @@ export default {
       error: null,
       complete: false,
       message: null,
+      showReader: true,
     };
   },
   components: {
     QrcodeStream,
   },
   methods: {
+    refreshReader(){
+      this.showReader = false;
+
+      setTimeout(()=>{
+        this.showReader = true;
+      },500)
+    },
     onError(error) {
       if (error.name === "NotAllowedError") {
         this.error = "user denied camera access permission";
@@ -48,14 +61,32 @@ export default {
         this.error = "browser seems to be lacking features";
       }
     },
-    onDecode(decodedString) {
-      if (decodedString === "ok") {
-        // change ok to the attandance session code
-        this.complete = true;
-        // send student id to backend (regn)
-        return;
-      }
+    async onDecode(decodedString) {
       this.message = "scanning..";
+
+      console.log('before',decodedString);
+      try {
+        decodedString = JSON.parse(decodedString);
+      } catch (error) {
+        this.refreshReader();
+      }
+      console.log('after',decodedString);
+
+      try {
+        const uid = this.$store.getters['student/getStudent'].uid
+        const  payload = {
+          studentUid: uid,
+          teacherUid: decodedString.uid,
+          id: decodedString.id
+        }
+        await this.$store.dispatch('attendance/pushAttendance',payload)
+        this.complete = true;
+        return;
+      } catch (error) {
+        this.error = error;
+        console.log(error);
+        this.refreshReader();
+      }
     },
   },
 };

@@ -40,13 +40,11 @@ const routes = [
   },
   {
     path: "/teacher/session/:id",
-    props: true,
     component: () => import("../pages/teacher/TeacherTeachingSession.vue"),
     meta: { requiresAuth: true },
   },
   {
     path: "/teacher/setupclass/:id",
-    props: true,
     component: () => import("../pages/teacher/TeacherSetUpClass.vue"),
     meta: { requiresAuth: true },
   },
