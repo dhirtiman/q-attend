@@ -4,7 +4,7 @@
   >
     <h1 class="mb-5 mt-20 text-3xl font-bold">Attendance for</h1>
     <p class="text-sm">{{ paper }}</p>
-    <section v-if="!done" >
+    <section v-if="!done">
       <p class="mt-5 text-center text-xl">
         Time remaining: {{ formattedTime }}
       </p>
@@ -37,9 +37,14 @@
         <p>This will end the session</p>
       </base-dialog>
     </section>
-    <section v-else>
-    <h1 class="mb-5 mt-20 text-3xl font-bold"> Completed Sucessfully..</h1>
-
+    <section v-else class=" flex flex-col items-center">
+      <h1 class="mb-10 mt-20 text-3xl font-bold">Completed Sucessfully..</h1>
+      <router-link
+        to="/teacher/attendance"
+        class="mt-10 text-black font-medium text-center h-12 w-52 rounded-xl bg-violet-400 py-2 text-xl"
+        secondary
+        >View attendance</router-link
+      >
     </section>
   </div>
 </template>
@@ -62,14 +67,14 @@ export default {
   },
   computed: {
     sessionId() {
-       const id = this.$store.getters["attendance/getSession"].id;
-       const uid = this.$store.getters['teacher/getTeacher'].uid;
-       const payload = {
+      const id = this.$store.getters["attendance/getSession"].id;
+      const uid = this.$store.getters["teacher/getTeacher"].uid;
+      const payload = {
         id,
         uid,
-       }
+      };
 
-       return JSON.stringify(payload);
+      return JSON.stringify(payload);
     },
     formattedTime() {
       const minutes = Math.floor(this.timer / 60);
@@ -94,6 +99,15 @@ export default {
     endSession() {
       this.done = true;
       // Implement other action functionality here
+      const id = this.$store.getters["attendance/getSession"].id;
+      const uid = this.$store.getters["teacher/getTeacher"].uid;
+
+      const payload = {
+        id,
+        uid,
+      };
+
+      this.$store.dispatch("attendance/endSession", payload);
     },
     toggleDialog() {
       this.showDialog = !this.showDialog;

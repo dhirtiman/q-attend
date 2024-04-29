@@ -132,7 +132,7 @@ export default {
     };
   },
   methods: {
-    submitForm() {
+  async  submitForm() {
       console.log("submitting form");
       if (
         this.form.sessionYear === "" ||
@@ -152,8 +152,9 @@ export default {
       };
 
       console.log(payload);
-      this.$store.dispatch("teacher/addTeachingSession", payload);
+      await this.$store.dispatch("teacher/addTeachingSession", payload);
       this.closeForm();
+      this.$router.go();
     },
     closeForm() {
       this.$emit("close");

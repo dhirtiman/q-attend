@@ -8,7 +8,7 @@ export default {
       return {
 
         teacher: null,
-        teachingSessions: null,
+        teachingSessions: [],
 
         noTeachingSessions: false,
         teacherIsloggedIn: false,

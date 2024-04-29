@@ -55,6 +55,13 @@ const routes = [
     meta: { requiresAuth: true },
   },
 
+  {
+    path: '/teacher/attendance',
+    name:'attendance',
+    component: ()=> import('../pages/teacher/TeacherAttendanceView.vue'),
+    meta: {requiresAuth: true}
+  },
+
   { path: "/:notFound(.*)", redirect: "/home" },
 ];
 
