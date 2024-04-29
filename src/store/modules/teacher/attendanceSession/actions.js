@@ -1,6 +1,7 @@
 import {
   doc,
   addDoc,
+  deleteDoc,
   getDoc,
   getDocs,
   updateDoc,
@@ -13,7 +14,7 @@ import { db } from "src/main.js";
 
 export default {
   async initSession(context, payload) {
-    // keep the session details in a session instance in the store
+    // keep the session details in a session instance in the store  
     const uid = context.rootGetters["teacher/getTeacher"].uid;
 
     payload = {
@@ -34,7 +35,7 @@ export default {
       ...payload,
     };
 
-    context.commit("createSession", payload);
+    context.commit("setSession", payload);
     localStorage.setItem("aSession", JSON.stringify(payload));
 
     // send the state to backend too done
@@ -66,9 +67,6 @@ export default {
 
   async endSession(context, payload) {
     /// tell the backend the session ended
-
-    console.log(payload);
-
     const attendanceSessionRef = doc(
       db,
       "attendanceSessions",
@@ -90,11 +88,8 @@ export default {
        payload = docSnap.data();
 
 
-      context.commit("endSession", payload);
+      context.commit("setSession", payload);
       localStorage.setItem("aSession", JSON.stringify(payload));
-      // context.dispatch('retrieveAttendanceWithStudents',docSnap.data());
-
-      console.log('hello??');
     }
   },
 
@@ -157,10 +152,8 @@ export default {
     console.log('start student retrieval');
     
 
-    let oldPayload = context.getters['getSession']
-    let newPayload = oldPayload;
+    let newPayload = context.getters['getSession']
     
-    console.log(oldPayload);
     newPayload.students = [];
     
     const studentsRef = collection(db, "students");
@@ -169,29 +162,39 @@ export default {
     
 
     studentsSnap.forEach((doc) => {
-    payload.forEach((uid) => {
-        console.log(uid,doc.id);
+    payload.forEach((uid,index) => {
         if (doc.id === uid) {
           newPayload.students.push(doc.data());
+          payload.splice(index,1);
         }
       });
     });
-    console.log('old payload.students',oldPayload.students);
-    console.log('new payload.students',newPayload.students);
 
 
 
-    context.commit('endSession',newPayload)
+    context.commit('setSession',newPayload)
     localStorage.setItem("aSession", JSON.stringify(newPayload));
 
 
     
   },
+  async removeASession(context,payload){ // payload is the aSession id
+  const uid = context.rootGetters['teacher/getTeacher'].uid
+    const aSessionRef = doc(db,'attendanceSessions',uid,'aSessions',payload) 
+     await deleteDoc(aSessionRef)
+      .then(()=>{
+        console.log('Successfully deleted the attendance list');
+        context.commit('removeASession');
+        localStorage.removeItem('aSession');
 
-  restoreASession(context,payload){
-    context.commit('endSession',payload)
-    localStorage.setItem("aSession", JSON.stringify(payload));
-  },
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
+
+
+  }
+ 
 };
 
 function getCurrentDate() {
