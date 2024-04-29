@@ -29,12 +29,10 @@ export default {
     onAuthStateChanged(auth, (user) => {
       let value;
       if (user) {
-        console.log(user);
         value = true;
       } else {
         value = false;
       }
-      console.log(value);
       this.$store.commit("setLogin", value);
     });
   },

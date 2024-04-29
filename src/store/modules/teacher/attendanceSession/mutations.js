@@ -8,4 +8,5 @@
     storeASessions(state,payload){
         state.sessions = payload
     },
+  
 }
