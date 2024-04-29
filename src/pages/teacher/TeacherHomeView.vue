@@ -11,7 +11,7 @@
 
     <div class="z-10 my-1 flex h-svh flex-col items-center">
       <h1 class="mb-20 mt-20 text-center text-3xl font-bold">
-        Hi! , {{ teacherName }}
+        Hi! Teacher
       </h1>
       <div class="w-full">
         <p class="text-center text-lg" v-if="noTeachingSession">
@@ -60,6 +60,10 @@
           >
         </section>
       </transition>
+      <p class="mt-20">-----or------</p>
+      <base-button link secondary to="/teacher/ahistory" class="mt-2 rounded-2xl h-12 w-64 py-3 bg-violet-400"
+        >View Attendance History</base-button
+      >
     </div>
   </div>
 </template>
@@ -77,18 +81,14 @@ export default {
   mounted() {
     const teacher = this.$store.getters["teacher/getTeacher"];
     this.$store.dispatch("teacher/retrieveTeachingSessions", teacher);
-    console.log(this.$store.getters["teacher/getTeachingSessions"]);
+    this.$store.dispatch('attendance/retrieveAllSessions',teacher);
   },
   computed: {
-    teacherName() {
-      return "teacherman";
-    },
     noTeachingSession() {
       return this.$store.getters["teacher/noTeachingSessions"];
     },
     teachingSessions() {
       const tSessions = this.$store.getters["teacher/getTeachingSessions"];
-      console.log(tSessions);
       return tSessions;
     },
   },
