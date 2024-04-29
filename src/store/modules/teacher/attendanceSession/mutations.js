@@ -1,14 +1,11 @@
     export default {
-    createSession(state,payload){
+    setSession(state,payload){
         state.session = payload;
     },
-    pushStudent(state,payload){ // temporary //what lol
-        state.session.students.push(payload);
-    },
-    endSession(state,payload){
-        state.session = payload;
+    removeASession(){
+        state.session = null
     },
     storeASessions(state,payload){
         state.sessions = payload
-    }
+    },
 }
