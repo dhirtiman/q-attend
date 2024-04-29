@@ -14,7 +14,7 @@ import { db } from "src/main.js";
 
 export default {
   async initSession(context, payload) {
-    // keep the session details in a session instance in the store  
+    // keep the session details in a session instance in the store
     const uid = context.rootGetters["teacher/getTeacher"].uid;
 
     payload = {
@@ -85,29 +85,38 @@ export default {
 
     if (docSnap.exists()) {
       console.log("Finalized attendance session retreived 1");
-       payload = docSnap.data();
-
+      payload = docSnap.data();
 
       context.commit("setSession", payload);
       localStorage.setItem("aSession", JSON.stringify(payload));
     }
   },
 
-  async retrieveAllSessions(context, payload) {
-    // CONTINUE HERE
-    /// YOU HAVE TO add a counter of total attendanceSessions for a teaching session for the teacher
-    // then using that determine whether to retreive from localstorage or not
+  setSessionByID(context, payload) {
+    //  get aSession id as payload
 
-    const attendanceSessionTeacherColRef = doc(
+    const sessions = context.getters["getSessions"];
+
+    const session = sessions.find((session) => session.id === payload);
+
+    context.commit("setSession", session);
+    localStorage.setItem("aSession", JSON.stringify(session));
+  },
+
+  async retrieveAllSessions(context, payload) {
+    const attendanceSessionTeacherColRef = collection(
       db,
       "attendanceSessions",
       payload.uid,
       "aSessions",
     );
-    const snapshot = (await getCountFromServer(attendanceSessionTeacherColRef)) || null;
+    const snapshot =
+      (await getCountFromServer(attendanceSessionTeacherColRef)) || null;
 
+    let aSessionCount;
     if (snapshot) {
-      const aSessionCount = snapshot.data().count;
+      aSessionCount = snapshot.data().count;
+      console.log("total Attendance Sessions are:", aSessionCount);
     } else {
       throw new Error("aSessionCount for this teacher doesn't exist");
     }
@@ -117,6 +126,9 @@ export default {
     if (aSessionCountLocalStorage != null) {
       if (aSessionCount == aSessionCountLocalStorage) {
         console.log("No new Attendance Sessions were present so no retrieval");
+        const sessions = JSON.parse(localStorage.getItem('sessions'))
+        context.commit("storeASessions", sessions);
+
         return;
       }
     }
@@ -126,17 +138,19 @@ export default {
     const allSessionsRef = collection(
       db,
       "attendanceSessions",
-      payload.Uid,
+      payload.uid,
       "aSessions",
     );
     payload = [];
     const allSessionsSnap = await getDocs(allSessionsRef);
 
+    console.log(allSessionsSnap);
+
     allSessionsSnap.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
       payload.push({
         id: doc.id,
-        ...doc.Data(),
+        ...doc.data(),
       });
     });
 
@@ -145,56 +159,51 @@ export default {
     context.commit("storeASessions", payload);
     localStorage.setItem("sessions", JSON.stringify(payload));
   },
-  
 
-  async retrieveAttendanceWithStudents(context, payload) { //payload  is students array 
+  async retrieveAttendanceWithStudents(context, payload) {
+    //payload  is students array
 
-    console.log('start student retrieval');
-    
+    console.log("start student retrieval");
 
-    let newPayload = context.getters['getSession']
-    
+    let newPayload = context.getters["getSession"];
+
     newPayload.students = [];
-    
+
     const studentsRef = collection(db, "students");
     const studentsSnap = await getDocs(studentsRef);
 
-    
-
     studentsSnap.forEach((doc) => {
-    payload.forEach((uid,index) => {
+      payload.forEach((uid, index) => {
         if (doc.id === uid) {
           newPayload.students.push(doc.data());
-          payload.splice(index,1);
+          payload.splice(index, 1);
         }
       });
     });
 
-
-
-    context.commit('setSession',newPayload)
+    context.commit("setSession", newPayload);
     localStorage.setItem("aSession", JSON.stringify(newPayload));
-
-
-    
   },
-  async removeASession(context,payload){ // payload is the aSession id
-  const uid = context.rootGetters['teacher/getTeacher'].uid
-    const aSessionRef = doc(db,'attendanceSessions',uid,'aSessions',payload) 
-     await deleteDoc(aSessionRef)
-      .then(()=>{
-        console.log('Successfully deleted the attendance list');
-        context.commit('removeASession');
-        localStorage.removeItem('aSession');
-
+  async removeASession(context, payload) {
+    // payload is the aSession id
+    const uid = context.rootGetters["teacher/getTeacher"].uid;
+    const aSessionRef = doc(
+      db,
+      "attendanceSessions",
+      uid,
+      "aSessions",
+      payload,
+    );
+    await deleteDoc(aSessionRef)
+      .then(() => {
+        console.log("Successfully deleted the attendance list");
+        context.commit("removeASession");
+        localStorage.removeItem("aSession");
       })
-      .catch((error)=>{
+      .catch((error) => {
         console.log(error);
-      })
-
-
-  }
- 
+      });
+  },
 };
 
 function getCurrentDate() {

@@ -32,9 +32,7 @@
       <base-button link :to="startAttendanceLink" class="rounded-2xl h-12 w-64 py-3 bg-violet-500 "
         >Start Attendance session</base-button
       >
-      <base-button link secondary to="" class="rounded-2xl h-12 w-64 py-3 bg-violet-400"
-        >View Attendance History</base-button
-      >
+   
       <base-button @click="removeSession"  secondary  class="rounded-2xl h-12 w-64 py-3 bg-violet-400"
         >Delete Teaching Session</base-button
       >

@@ -56,6 +56,12 @@ const routes = [
   },
 
   {
+    path: '/teacher/ahistory',
+    component: ()=> import('../pages/teacher/TeacherAttendanceHistory.vue'),
+    meta: { requiresAuth: true },
+
+  },
+  {
     path: '/teacher/attendance',
     name:'attendance',
     component: ()=> import('../pages/teacher/TeacherAttendanceView.vue'),
