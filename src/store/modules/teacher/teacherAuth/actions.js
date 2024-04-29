@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-import { doc, setDoc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 
 import { db } from "src/main.js";
 
@@ -53,6 +53,8 @@ export default {
   async saveTeacherData(context, payload) {
     localStorage.setItem("teacher", JSON.stringify(payload));
 
+  
+
     await setDoc(doc(db, "teachingSessions", payload.uid), {
       teachingSessions: [{}],
     })
@@ -67,19 +69,24 @@ export default {
 
   async getTeacherData(context, payload) {
     context.commit("setTeacher", payload);
-    const teacher = JSON.parse(localStorage.getItem("teacher"));
-    if (teacher) {
-      return;
+    console.log(payload);
+    
+    const teacher = JSON.parse(localStorage.getItem("teacher"))
+    console.log(teacher);
+    if (teacher != null) {
+      if (teacher.uid === payload.uid) {
+        return;
+      }
     }
+      
     localStorage.setItem("teacher", JSON.stringify(payload));
   },
-
   async retrieveTeachingSessions(context, payload) {
     const teachingSessions = JSON.parse(
       localStorage.getItem("teachingSessions"),
     );
     const recentlyAdded = JSON.parse(localStorage.getItem("recentlyAdded"));
-    if (!recentlyAdded && teachingSessions) {
+    if (!recentlyAdded && (teachingSessions.length >= 1)) {
       console.log("teachingSessions already exist in the local storage");
       context.commit("setTeachingSessions", teachingSessions);
       return;
@@ -108,9 +115,33 @@ export default {
         term: payload.term,
         semesters: payload.semesters,
         paperCodes: payload.paperCodes,
-      }),
+      })
     }).catch((error) => {
       console.log(error);
     });
   },
+
+  async deleteTeachingSession(context,payload){ 
+    const uid = context.getters['getTeacher'].uid
+    const tSessions = context.getters["getTeachingSessions"]
+
+    const teachingSessionRef = doc(db,'teachingSessions',uid)
+
+    context.commit('setRecentlyAdded',true);
+
+    await updateDoc(teachingSessionRef, {
+      teachingSessions: arrayRemove(payload.tSession)
+    })
+    .then(()=>{
+      console.log('Successfully deleted the teachingSession');
+      tSessions.splice(payload.id, 1);
+      context.commit('setTeachingSessions',tSessions)
+      localStorage.setItem("teachingSessions", JSON.stringify(tSessions));
+
+    })
+    .catch((error)=>{
+      console.log(error);
+      throw error
+    })
+  }
 };

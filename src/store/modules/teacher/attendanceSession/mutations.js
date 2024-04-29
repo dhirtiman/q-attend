@@ -1,4 +1,4 @@
-export default {
+    export default {
     createSession(state,payload){
         state.session = payload;
     },
@@ -7,5 +7,8 @@ export default {
     },
     endSession(state,payload){
         state.session = payload;
+    },
+    storeASessions(state,payload){
+        state.sessions = payload
     }
 }

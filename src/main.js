@@ -12,6 +12,8 @@ import App from './App.vue'
 
 import BaseButton from './components/ui/BaseButton.vue';
 import BaseDialog from './components/ui/BaseDialog.vue';
+import BaseSpinner from './components/ui/BaseSpinner.vue';
+
 import BlobContainer from './components/ui/BlobContainer.vue';
 
 
@@ -51,6 +53,7 @@ app.use(store);
 app.component('base-button', BaseButton);
 app.component('base-dialog', BaseDialog);
 app.component('blob-container',BlobContainer);
+app.component('base-spinner',BaseSpinner)
 
 
 app.mount('#app');

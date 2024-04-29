@@ -7,7 +7,7 @@
       class="h-auto w-4/5 rounded-xl border border-violet-600 bg-black bg-opacity-30 text-justify mb-10"
     >
       <p class="mb-4 text-xl text-white">
-        <span class="font-bold">Session ID:</span> {{ session.id }}
+        <span class="font-bold">Session ID:</span> {{ id }}
       </p>
       <p class="mb-4 text-xl text-white">
         <span class="font-bold">Session Year:</span> {{ session.sessionYear }}
@@ -35,6 +35,10 @@
       <base-button link secondary to="" class="rounded-2xl h-12 w-64 py-3 bg-violet-400"
         >View Attendance History</base-button
       >
+      <base-button @click="removeSession"  secondary  class="rounded-2xl h-12 w-64 py-3 bg-violet-400"
+        >Delete Teaching Session</base-button
+      >
+
     </div>
   </div>
 </template>
@@ -68,5 +72,22 @@ export default {
       return "/teacher/setupclass/" + this.id;
     },
   },
+  methods: {
+    async removeSession(){
+      const payload = {
+        tSession: this.$store.getters["teacher/getTeachingSessions"][this.id],
+        id: this.id,
+      }
+      await this.$store.dispatch('teacher/deleteTeachingSession',payload)
+      .then(()=>{
+
+        this.$router.go(-1)
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
+
+    }
+  }
 };
 </script>

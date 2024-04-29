@@ -23,7 +23,7 @@ export default {
 
 
   noTeachingSessions(state) {
-    if (!state.teachingSessions) {
+    if (state.teachingSessions.length < 1) {
       return true;
     }
     return false;

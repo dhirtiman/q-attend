@@ -7,6 +7,7 @@ export default {
   state() {
     return {
       session: {
+        completed: false,
         id: '1', 
         date: '20-03-2024',
         time: '10:30',
@@ -24,7 +25,8 @@ export default {
           uniRolln: 2,
           classRolln: 2,
         },],
-      }
+      },
+      sessions: null,
     };
   },
   mutations,
