@@ -1,4 +1,4 @@
-# Q-Attend
+# Q-Attend [![wakatime](https://wakatime.com/badge/user/80b5c61e-9eb3-4a4b-a6bc-1ac89c91f141/project/018b05ee-4f4d-40be-8c19-750834517841.svg)](https://wakatime.com/badge/user/80b5c61e-9eb3-4a4b-a6bc-1ac89c91f141/project/018b05ee-4f4d-40be-8c19-750834517841)
 
 Q-Attend is a Vue.js application for managing attendance records using QR codes.
 
