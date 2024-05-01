@@ -82,22 +82,20 @@ export default {
     localStorage.setItem("teacher", JSON.stringify(payload));
   },
   async retrieveTeachingSessions(context, payload) {
+    
     const teachingSessions = JSON.parse(
       localStorage.getItem("teachingSessions"),
     );
     const recentlyAdded = JSON.parse(localStorage.getItem("recentlyAdded"));
-    if (!recentlyAdded && (teachingSessions.length >= 1)) {
-      console.log("teachingSessions already exist in the local storage");
-      context.commit("setTeachingSessions", teachingSessions);
-      return;
-    }
+    
+
 
     const docRef = doc(db, "teachingSessions", payload.uid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       context.commit("setRecentlyAdded", false);
       console.log();
-      payload = docSnap.data().teachingSessions.slice(1);
+      payload = docSnap.data().teachingSessions;
       console.log(payload);
       context.commit("setTeachingSessions", payload);
       localStorage.setItem("teachingSessions", JSON.stringify(payload));
