@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex h-lvh w-full flex-col items-center justify-normal bg-black bg-gradient-to-b from-purple-950 from-25% via-black text-white"
+    class="flex h-fitw-full w-full flex-col items-center justify-normal bg-black bg-gradient-to-b from-purple-950 from-25% via-black text-white"
   >
     <blob-container class="left-0 size-72"></blob-container>
     <blob-container
@@ -58,12 +58,14 @@
             secondary
             >Add more</base-button
           >
-        </section>
-      </transition>
-      <p class="mt-20">-----or------</p>
+          <p class="mt-5">-----or------</p>
       <base-button link secondary to="/teacher/ahistory" class="mt-2 rounded-2xl h-12 w-64 py-3 bg-violet-400"
         >View Attendance History</base-button
       >
+        </section>
+        
+      </transition>
+      
     </div>
   </div>
 </template>
